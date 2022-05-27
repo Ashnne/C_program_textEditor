@@ -1,2 +1,2 @@
 # C_program_textEditor
-the lasted code
+the last code
