@@ -4,30 +4,30 @@
 #include <windows.h>
 #define ID_1  10
 
-//»º³åÎÄ¼þÖ¸Õë 
+//ç¼“å†²æ–‡ä»¶æŒ‡é’ˆ 
 FILE *buffFile;
-//¶¨ÒåÎ»ÖÃ£º   ÒâÒå£º¼ôÇÐ°åÎÄ¼þµÄÎÄ¼þÖ¸ÕëÍ·
-FILE *clipBoard;  //ÌØ±ð×¢Òâ£ºÐèÒª×ÔÐÐ´ò¿ª¹Ø±Õ
-//Ô´ÎÄ¼þÖ¸Õë 
+//å®šä¹‰ä½ç½®ï¼š   æ„ä¹‰ï¼šå‰ªåˆ‡æ¿æ–‡ä»¶çš„æ–‡ä»¶æŒ‡é’ˆå¤´
+FILE *clipBoard;  //ç‰¹åˆ«æ³¨æ„ï¼šéœ€è¦è‡ªè¡Œæ‰“å¼€å…³é—­
+//æºæ–‡ä»¶æŒ‡é’ˆ 
 FILE *sourceFile;
 
-//´°¿ÚµÄ¸ßºÍ¿í 
+//çª—å£çš„é«˜å’Œå®½ 
 extern double height, width;
-//GetFontHeight()µÄÁ½±¶ 
+//GetFontHeight()çš„ä¸¤å€ 
 extern double f;
 extern row;
 extern double height, width;
 extern int timer_interval;
 extern char charCh;
-extern double mouse_x;  //Êó±êÎ»ÖÃµÄxÖáÎ»ÖÃ
-extern double mouse_y;  //Êó±êÎ»ÖÃµÄyÖáÎ»ÖÃ
-extern int mouse_down;  //Êó±êÊÇ·ñµã»÷£¬1Îªµã»÷×´Ì¬£¬0ÎªËÉ¿ª×´Ì¬
+extern double mouse_x;  //é¼ æ ‡ä½ç½®çš„xè½´ä½ç½®
+extern double mouse_y;  //é¼ æ ‡ä½ç½®çš„yè½´ä½ç½®
+extern int mouse_down;  //é¼ æ ‡æ˜¯å¦ç‚¹å‡»ï¼Œ1ä¸ºç‚¹å‡»çŠ¶æ€ï¼Œ0ä¸ºæ¾å¼€çŠ¶æ€
 extern void display();
 extern void Delete();
 
 void CharEventProcess( int ch )
 {
-    uiGetChar( ch ); /*»ñÈ¡×Ö·û*/
+    uiGetChar( ch ); /*èŽ·å–å­—ç¬¦*/
     charCh = ch;
     //printf("%c",charCh);
     if (charCh >= 32 && charCh < 127 || charCh < 0 ) {
@@ -38,8 +38,8 @@ void CharEventProcess( int ch )
 
 void KeyboardEventProcess( int key, int event )
 {
-   uiGetKeyboard( key,event ); /*»ñÈ¡¼üÅÌ*/
-   /*Ò»´ÎÖ»ÄÜÉ¾³ýÒ»¸ö*/ 
+   uiGetKeyboard( key,event ); /*èŽ·å–é”®ç›˜*/
+   /*ä¸€æ¬¡åªèƒ½åˆ é™¤ä¸€ä¸ª*/ 
    static int delete_allow = 1; 
    if ( event == KEY_DOWN )
 	{
@@ -52,7 +52,7 @@ void KeyboardEventProcess( int key, int event )
 				}
 				break;
 			case VK_RETURN:
-				fprintf(buffFile,"\n");
+				Write('\n');
 				break;
 		}
 	}
@@ -76,7 +76,7 @@ void MouseEventProcess( int x, int y, int button, int event )
 	}
 }
 
-// ÓÃ»§µÄ¼ÆÊ±Æ÷Ê±¼äÏìÓ¦º¯Êý
+// ç”¨æˆ·çš„è®¡æ—¶å™¨æ—¶é—´å“åº”å‡½æ•°
 void TimerEventProcess(int timerID)
 {
 	if( timerID==ID_1) 
@@ -87,7 +87,7 @@ void TimerEventProcess(int timerID)
 
 void Main()
 {
-	SetWindowTitle( "ÎÄ±¾±à¼­Æ÷" );
+	SetWindowTitle( "æ–‡æœ¬ç¼–è¾‘å™¨" );
 	InitGraphics();
 	InitConsole();
 	
@@ -116,7 +116,7 @@ void Main()
 	registerMouseEvent( MouseEventProcess );
 	registerTimerEvent(TimerEventProcess);      	
 	
-	// ¿ªÆô¶¨Ê±Æ÷
+	// å¼€å¯å®šæ—¶å™¨
 	startTimer(ID_1, timer_interval);
 	
 }
