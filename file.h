@@ -5,9 +5,9 @@
 #include<time.h>
 
 extern int ifopen;
-//Ô´ÎÄ¼şÖ¸Õë 
+//æºæ–‡ä»¶æŒ‡é’ˆ 
 extern FILE *sourceFile;
-//»º³åÎÄ¼şÖ¸Õë 
+//ç¼“å†²æ–‡ä»¶æŒ‡é’ˆ 
 extern FILE* buffFile;
 extern char namedefault[101];
 
@@ -17,5 +17,6 @@ void FileSave();
 void FileSaveAs(char* name);
 void openFile();
 void CloseFile();
+void newFile();
 
 #endif
