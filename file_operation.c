@@ -503,7 +503,7 @@ void Search(char *temp){
 	int i=0;
     int tempLength = strlen(temp);
     char buff[100];
-	while(!feof(buffFile)){
+	while( 1){
         //过渡字符
         fseek(buffFile,i,0);
         char ch = fgetc(buffFile);
@@ -538,7 +538,22 @@ void Search(char *temp){
     return;
 } 
 
-void Change(char* temp)
+void Change( char* temp,char* replaceContain)
 {
-	
+	while( 1){
+		//先找，
+		Search( temp);
+		//找不到就不找了 
+		if( cursorBegin == cursorTail)	return;
+		//找到的话就换一下
+		//先删 
+		Delete();
+		//再补入
+		int i;
+		i = 0;
+		while( replaceContain[i]){
+			Write( replaceContain[i]);
+			i++;
+		}
+	}
 }
