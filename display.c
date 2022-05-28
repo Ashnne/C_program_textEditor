@@ -6,10 +6,10 @@ void DrawMenu()
 	//SetPointSize(10);
 	//menu字符指针数组 ，用于画menu 
 	setMenuColors("Dark Grey","Black","Dark Grey","Red",1);
-	char* menuListFile[6]={ "文件", "打开 | Ctrl-O", "保存 | Ctrl-S", "另存为 | Ctrl-N", "关闭 | Ctrl-E" };//另存为的快捷键待定 
+	char* menuListFile[6]={ "文件", "新建","打开 | Ctrl-O", "保存 | Ctrl-S", "另存为 | Ctrl-N", "关闭 | Ctrl-E" }; 
 	char* menuListEdit[4]={ "编辑", "复制 | Ctrl-C", "剪切 | Ctrl-X", "粘贴 | Ctrl-V" };
 	char* menuListSearch[3]={ "搜索", "查找 | Ctrl-F", "替换 | Ctrl-R" };
-	char* menuListSize[4]={ "大小", "10", "20", "30" };
+	char* menuListSize[4]={ "格式", "字体大小", "行间距", "宽间距" };
 	char* menuListFont[4]={ "字体", "Times", "Courier", "Default" };
 	char* menuListColor[9]={ "背景颜色", "白色", "粉色", 
 	"翡翠绿", "黄色", "紫色", "蓝色", "橙色" };
@@ -23,10 +23,11 @@ void DrawMenu()
 	selection_6=menuList( GenUIID(0), width/6*5, height-f, width/6, width/6, f, menuListColor, 8 );
 	switch ( selection_1 )
 	{
-		case 1:openFile();break;//openallow *= -1;
-		case 2:FileSave();break;
-		case 3:newAllow *= -1;offput *= -1;break;
-		case 4:CloseFile();break;
+		case 1:newFile();break;
+		case 2:openallow *= -1;break;
+		case 3:FileSave();break;
+		case 4:newAllow *= -1;offput *= -1;break;
+		case 5:CloseFile();break;
 	}
 	switch ( selection_2 )
 	{
@@ -41,9 +42,9 @@ void DrawMenu()
 	}
 	switch ( selection_4 )
 	{
-		case 1: size = 10;textheight=0.14;break;
-		case 2:	size = 20;textheight=0.22;break;	
-		case 3: size = 30;textheight=0.38;break;	
+		case 1: fontSize_allow *= -1;break;
+		case 2:	textheight_allow *= -1;break;	
+		case 3: textwidth_allow *= -1;break;	
 	}
 	switch ( selection_5 )
 	{
@@ -178,6 +179,7 @@ void NewInterface(){
 
 void searchFace(){
 	if(searchallow == 1){
+		char content[100];
 		setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
 		textbox(GenUIID(1),width/10*3.5,height-f*4,width/10*3,f,content,100); 
 		drawBox( width/10*6.6, height-f*4, width/10*1, f, 1,"查找的字符" , 'C', "Grey");
@@ -190,10 +192,11 @@ void searchFace(){
 
 void changeFace(){
 	if(changeallow == 1){
+		char content[100];
 		setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
 		textbox(GenUIID(1),width/10*3.5,height-f*4,width/10*3,f,content,100);
 		drawBox( width/10*6.6, height-f*4, width/10*1, f, 1,"被替换字符串" , 'C', "Grey");
-		char* replaceMute[100];
+		char replaceMute[100];
 		textbox(GenUIID(2),width/10*3.5,height-f*5.1,width/10*3,f,replaceMute,100);
 		drawBox( width/10*6.6, height-f*5.1, width/10*1, f, 1,"替换目标字符" , 'C', "Grey");
 		if(button(GenUIID(0),width/10*2,height-f*4.55,width/10,f,"替换")){
@@ -208,20 +211,21 @@ void drawBox(double x, double y, double w, double h, int fillflag, char *label, 
 			
 			
 			
-/*void openFace(){
+void openFace(){
 	if(openallow == -1)	return;
 	SetPenColor("Dark Grey");
 	drawRectangle(width/10-0.06,height-f*2.8,width/10*6,f,1);
 	MovePen(width/10,height-f*2.5);
 	SetPenColor("Black");
 	DrawTextString("File name:");
+	char content[100];
 	setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
 	textbox(GenUIID(0),width/10*4+0.2,height-f*2.8,width/10*5,f,content,100);
 	if(button(GenUIID(0),width/10*4+2.5,height-f*2.8,width/10,f,"打开")){
 		openallow *= -1;
 		OpenFile(content); 
 	}
-}*/
+}
 
 void helpFace(){
 	if(helpallow == 1){
@@ -265,6 +269,44 @@ int Count()
     return j;
 }
 
+void format(){
+    if( fontSize_allow == -1 && textheight_allow == -1 && textwidth_allow == -1)    return;
+    //方便后面调整标签  
+    char *label[3] = { "字符大小", "行间距", "宽间距"};
+    //区分 
+    int judge = 0;
+    if( textheight_allow == 1)  judge = 1;
+    else if(textwidth_allow == 1)   judge = 2;
+    //修改allow值
+	if(fontSize_allow == 1) fontSize_allow == -1;
+	if(textheight_allow == 1) textheight_allow == -1;
+	if(textwidth_allow == 1) textwidth_allow == -1;
+    //用于接收输入字符串
+    char contain[10];
+    setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
+	textbox(GenUIID(1),width/10*3.5,height-f*4,width/10*3,f,contain,9); 
+	SetPenColor("Dark Grey");
+	drawBox( width/10*6.6, height-f*4, width/10*1, f, 1, label[judge] , 'C', "Black");
+	SetPenColor("Black");
+	if(button(GenUIID(0),width/10*2,height-f*4,width/10,f,"确定")){
+		switch(judge){
+            case 0:fontSize = charToNumber(contain);break;
+            case 1:textheight = charToNumber(contain);break;
+            case 2:textwidth = charToNumber(contain);break;
+        }
+	}
+}
+
+int charToNumber( char *temp ){
+    int mute = 0;
+    int i = 0;
+    while(temp[i]){
+        mute = mute * 10 + ( temp[i] - '0');
+        i++;
+    }
+    return mute;   
+}
+
 void display()
 {
 	DefineColor( "Dark Grey", 0.60, 0.60, 0.60 );
@@ -280,7 +322,8 @@ void display()
 	searchFace();
 	helpFace();
 	changeFace();
-	//openFace();
+	openFace();
+	format();
 	
 	mouseEvent();
 	
