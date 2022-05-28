@@ -1,30 +1,70 @@
 #include"mouse.h"
 
+
+/*
+mouseEventå‡½æ•°
+{
+1.è¾“å…¥å˜é‡ï¼ŒåŠå…¶æ„ä¹‰ï¼š
+ 2.æ— è¿”å›å€¼ 
+ 3.å®ç°çš„åŠŸèƒ½ï¼Œå°†é¼ æ ‡é€‰ä¸­çš„å­—ç¬¦ä¸²åœ¨æ–‡æœ¬ä¸­çš„æŒ‡é’ˆä½ç½®å¤´å°¾èµ‹å€¼ç»™å…¨å±€å˜é‡cursorBegin,cursorTail 
+ 4.éœ€è¦ç”¨åˆ°çš„å¤´æ–‡ä»¶ï¼š"imgui.h" "math.h"
+   éœ€è¦ç”¨åˆ°çš„å…¨å±€å˜é‡ï¼š FILE *buffFile;int cursorBegin;int cursorTail;
+   éœ€è¦è°ƒç”¨çš„å‡½æ•°ï¼š int mouseEventCursor(double mouseX,double mouseY, double X, double Y, double width, double height);
+   éœ€è¦ç”¨åˆ°çš„å…¨å±€å˜é‡ ï¼šdouble textwidth;//ä¸¤ä¸ªå­—ä¹‹é—´çš„å·¦å³è·ç¦»
+                     double textheight;//ä¸¤ä¸ªå­—ä¹‹é—´çš„ä¸Šä¸‹
+                     double width;
+                     double height;
+   				 	 int cursorBegin;
+   				 	 int cursorTail;
+                     int rawMax;
+                     static UIState gs_UIState;//é¼ æ ‡ã€é”®ç›˜ç­‰ä¸€ç³»åˆ—çŠ¶æ€
+typedef struct {
+	double mousex;
+	double mousey;
+	int    mousedown;
+	int    clickedItem;// item that was clicked
+	int    actingMenu; // acting menu list 
+	int    kbdItem;    // item that takes keyboard
+	int    lastItem;   // item that had focus just before
+	int    keyPress;   // input key
+	int    charInput;  // input char
+	int    keyModifiers;  //  key modifier (shift, ctrl)
+} UIState;
+                     
+ 5.å¾…ä¼˜åŒ–çš„åŠŸèƒ½ 
+ 
+  æ±‰å­—å…¼å®¹ï¼ˆæš‚æ—¶çš„æ€è·¯æ— æ³•åŒºåˆ†æ±‰å­—å’Œè‹±æ–‡å­—æ¯ï¼‰
+ 
+ 6.æµ‹è¯•å‡½æ•° 
+ 
+ //å¾…å†™
+}
+*/
 void mouseEvent(){
     static int judgeUp = 0;
 	if(mouse_down == 0 && judgeUp == 0)	return; 
-    //ÕâÀï¶ÁÈ¡Êó±êµÄ×ø±êºÍ×´Ì¬²¢¸³Öµ
+    //è¿™é‡Œè¯»å–é¼ æ ‡çš„åæ ‡å’ŒçŠ¶æ€å¹¶èµ‹å€¼
     double mouseX = mouse_x;
     double mouseY = mouse_y;
-    //ÕâÀï¸³ÖµÒ»ÏÂ×ø±êÔ­µã
+    //è¿™é‡Œèµ‹å€¼ä¸€ä¸‹åæ ‡åŸç‚¹
     double X_zero = width / 10;
     double Y_zero =  height - f * 2 ;
-    //´ÓÊó±ê¿ªÊ¼µã»÷Ê±¿ªÊ¼¹¤×÷,Í¬Ê±Áô¸ö¼ÇºÅjudgeUp£¬µÚÒ»´ÎËÉ¿ªÊó±êµÄÊ±ºòÔÙ´Î¼ÇÂ¼×ø±ê
+    //ä»é¼ æ ‡å¼€å§‹ç‚¹å‡»æ—¶å¼€å§‹å·¥ä½œ,åŒæ—¶ç•™ä¸ªè®°å·judgeUpï¼Œç¬¬ä¸€æ¬¡æ¾å¼€é¼ æ ‡çš„æ—¶å€™å†æ¬¡è®°å½•åæ ‡
 
     if( mouse_down == 1 && judgeUp == 0){
-        //ÕâÀïĞèÒªÈ·¶¨Êó±êËùÔÚÎ»ÖÃµÄ¹â±ê,½èÓÃ¸¨Öúº¯ÊımouseEventCursor
+        //è¿™é‡Œéœ€è¦ç¡®å®šé¼ æ ‡æ‰€åœ¨ä½ç½®çš„å…‰æ ‡,å€Ÿç”¨è¾…åŠ©å‡½æ•°mouseEventCursor
         cursorBegin = mouseEventCursor( mouseX, mouseY, X_zero, Y_zero, textwidth, textheight);
-        //ÕâÀïÖØÖÃÒ»ÏÂ¹â±ê½áÊøÎ»ÖÃ
+        //è¿™é‡Œé‡ç½®ä¸€ä¸‹å…‰æ ‡ç»“æŸä½ç½®
         cursorTail = cursorBegin;
         judgeUp = 1;
     }
-    //ÕâÀïÅĞ¶ÏÒ»ÏÂ£¬Êó±ê°´¼üËÉ¿ªÁË£¬¶øÇÒÊÇµÚÒ»´Î
+    //è¿™é‡Œåˆ¤æ–­ä¸€ä¸‹ï¼Œé¼ æ ‡æŒ‰é”®æ¾å¼€äº†ï¼Œè€Œä¸”æ˜¯ç¬¬ä¸€æ¬¡
     if( mouse_down == 0 && judgeUp == 1 ){
-        //ÏÈ°ÑÅĞ¶Ï¸ÄÒ»ÏÂ£¬ÒÑ¾­ËÉ¿ªÁË
+        //å…ˆæŠŠåˆ¤æ–­æ”¹ä¸€ä¸‹ï¼Œå·²ç»æ¾å¼€äº†
         judgeUp = 0;
-        //ÕâÀïÍ¬ÑùĞèÒªÈ·¶¨Êó±êËùÔÚÎ»ÖÃµÄ¹â±ê£¬½èÖú¸¨Öúº¯Êı
+        //è¿™é‡ŒåŒæ ·éœ€è¦ç¡®å®šé¼ æ ‡æ‰€åœ¨ä½ç½®çš„å…‰æ ‡ï¼Œå€ŸåŠ©è¾…åŠ©å‡½æ•°
         cursorTail = mouseEventCursor( mouseX, mouseY, X_zero, Y_zero, textwidth, textheight);
-        //ÕâÀïÔÙ½øĞĞÒ»¸öµ÷ÊÔ£¬È·±£cursorTailĞ¡ÓÚcursorBegin
+        //è¿™é‡Œå†è¿›è¡Œä¸€ä¸ªè°ƒè¯•ï¼Œç¡®ä¿cursorTailå°äºcursorBegin
         if(cursorTail < cursorBegin){
             int temp;
             temp = cursorTail;
@@ -38,57 +78,57 @@ void mouseEvent(){
 
 
 /*
-mouseEventCursorº¯Êı(¸¨Öúº¯Êı)
+mouseEventCursorå‡½æ•°(è¾…åŠ©å‡½æ•°)
 {
-1.ÊäÈë±äÁ¿£¬¼°ÆäÒâÒå£º
-	double mouseX;//Êó±êËùÔÚÎ»ÖÃµÄX×ø±ê
-    double mouseY;//Êó±êËùÔÚÎ»ÖÃµÄY×ø±ê
-    double X;     //×ø±êÔ­µãµÄX×ø±ê
-    double Y;     //×ø±êÔ­µãµÄY×ø±ê
-    double width; //µ¥¸ö×Ö·ûµÄ¿í¶È
-    double height;//µ¥¸ö×Ö·ûµÄ¸ß¶È
- 2.·µ»ØÖµ£ºÀàĞÍ£ºint ÒâÒå£ºÊó±êµã»÷Î»ÖÃÔÚÎÄ±¾ÖĞµÄ¹â±êÎ»ÖÃ
- 3.ÊµÏÖµÄ¹¦ÄÜ£¬½«Êó±êµ±Ç°µã»÷µÄÎ»ÖÃ×ª»¯ÎªÎÄ±¾ÖĞ¹â±êÎ»ÖÃ²¢·µ»Ø 
- 4.ĞèÒªÓÃµ½µÄÈ«¾Ö±äÁ¿£º int charCount[1000];
- 5.´ıÓÅ»¯µÄ¹¦ÄÜ 
+1.è¾“å…¥å˜é‡ï¼ŒåŠå…¶æ„ä¹‰ï¼š
+	double mouseX;//é¼ æ ‡æ‰€åœ¨ä½ç½®çš„Xåæ ‡
+    double mouseY;//é¼ æ ‡æ‰€åœ¨ä½ç½®çš„Yåæ ‡
+    double X;     //åæ ‡åŸç‚¹çš„Xåæ ‡
+    double Y;     //åæ ‡åŸç‚¹çš„Yåæ ‡
+    double width; //å•ä¸ªå­—ç¬¦çš„å®½åº¦
+    double height;//å•ä¸ªå­—ç¬¦çš„é«˜åº¦
+ 2.è¿”å›å€¼ï¼šç±»å‹ï¼šint æ„ä¹‰ï¼šé¼ æ ‡ç‚¹å‡»ä½ç½®åœ¨æ–‡æœ¬ä¸­çš„å…‰æ ‡ä½ç½®
+ 3.å®ç°çš„åŠŸèƒ½ï¼Œå°†é¼ æ ‡å½“å‰ç‚¹å‡»çš„ä½ç½®è½¬åŒ–ä¸ºæ–‡æœ¬ä¸­å…‰æ ‡ä½ç½®å¹¶è¿”å› 
+ 4.éœ€è¦ç”¨åˆ°çš„å…¨å±€å˜é‡ï¼š int charCount[1000];
+ 5.å¾…ä¼˜åŒ–çš„åŠŸèƒ½ 
  
-  ºº×Ö¼æÈİ£¨ÔİÊ±µÄË¼Â·ÎŞ·¨Çø·Öºº×ÖºÍÓ¢ÎÄ×ÖÄ¸£©
+  æ±‰å­—å…¼å®¹ï¼ˆæš‚æ—¶çš„æ€è·¯æ— æ³•åŒºåˆ†æ±‰å­—å’Œè‹±æ–‡å­—æ¯ï¼‰
  
- 6.²âÊÔº¯Êı 
+ 6.æµ‹è¯•å‡½æ•° 
  
- //´ıĞ´
+ //å¾…å†™
 }
 */
 
 
 
 int mouseEventCursor(double mouseX,double mouseY, double X, double Y, double width, double height){
-    //¼ÆËãÒ»¸öÏà¶ÔÎ»ÖÃ£¨×ø±ê±ä»»£©£¬Ô­µãÎª£¨X£¬Y£©£¬ÔÚ×î×óÉÏ·½£¬Õı·½ÏòÎªÏòÏÂ£¬ÏòÓÒ
+    //è®¡ç®—ä¸€ä¸ªç›¸å¯¹ä½ç½®ï¼ˆåæ ‡å˜æ¢ï¼‰ï¼ŒåŸç‚¹ä¸ºï¼ˆXï¼ŒYï¼‰ï¼Œåœ¨æœ€å·¦ä¸Šæ–¹ï¼Œæ­£æ–¹å‘ä¸ºå‘ä¸‹ï¼Œå‘å³
     mouseX = mouseX - X;
     mouseY = Y - mouseY;
-    //¶¨Òå¼ÆËã³öÊó±êµã»÷µÄÇøÓòÎªµÚcharYĞĞ£¬µÚcharX¸ö
+    //å®šä¹‰è®¡ç®—å‡ºé¼ æ ‡ç‚¹å‡»çš„åŒºåŸŸä¸ºç¬¬charYè¡Œï¼Œç¬¬charXä¸ª
     int charX;
     int charY;
-    //È·¶¨ÔÚÒ»ĞĞÖĞµÄµÚ¼¸¸ö£¬¼´¹â±êÒÆ¶¯µ½¸ÃĞĞ×îÇ°ÃæÊ±£¬ĞèÒªÍùºóÒÆ¶¯¼¸¸öÎ»ÖÃ
+    //ç¡®å®šåœ¨ä¸€è¡Œä¸­çš„ç¬¬å‡ ä¸ªï¼Œå³å…‰æ ‡ç§»åŠ¨åˆ°è¯¥è¡Œæœ€å‰é¢æ—¶ï¼Œéœ€è¦å¾€åç§»åŠ¨å‡ ä¸ªä½ç½®
     charX = (int )((mouseX+textwidth/2)/textwidth);
-    //È·¶¨ÔÚµÚ¼¸ĞĞ£¬¼´¹â±êÔÚµÚ¼¸ĞĞÖĞ³öÏÖ
+    //ç¡®å®šåœ¨ç¬¬å‡ è¡Œï¼Œå³å…‰æ ‡åœ¨ç¬¬å‡ è¡Œä¸­å‡ºç°
     charY = (int )(mouseY/textheight + 1);
-    //ÏÂÃæÒª¿ªÊ¼¼ÆËãËùÔÚµÄ¹â±êÎ»ÖÃÁË,locationÎª¹â±êËùÔÚÎ»ÖÃ
+    //ä¸‹é¢è¦å¼€å§‹è®¡ç®—æ‰€åœ¨çš„å…‰æ ‡ä½ç½®äº†,locationä¸ºå…‰æ ‡æ‰€åœ¨ä½ç½®
     int location = 0;
-    //Ê×ÏÈ·ÀÖ¹yÒç³ö£¬¼´Ñ¡ÖĞÎ»ÖÃĞĞÎŞÄÚÈİµÄ»°Ä¬ÈÏÎªµ½×îºóÓĞÄÚÈİµÄÒ»ĞĞ,×î¶àµ½µÚÒ»ĞĞ
+    //é¦–å…ˆé˜²æ­¢yæº¢å‡ºï¼Œå³é€‰ä¸­ä½ç½®è¡Œæ— å†…å®¹çš„è¯é»˜è®¤ä¸ºåˆ°æœ€åæœ‰å†…å®¹çš„ä¸€è¡Œ,æœ€å¤šåˆ°ç¬¬ä¸€è¡Œ
     while( !charCount[charY] && charY!=1 )   charY--;
-    //°ÑÇ°ÃæËùÓĞµÄ¹â±ê¼ÓÆğÀ´£¬¼Óµ½locationÖĞ£¬´ËÊ±locationÒÑ¾­ÒÆ¶¯µ½µÚcharYĞĞµÚ0¸öÎ»ÖÃÉÏÁË
-    //´Ë´¦×¢Òâ£¬iÊÇ´Ó1¿ªÊ¼¼ÆÊı
+    //æŠŠå‰é¢æ‰€æœ‰çš„å…‰æ ‡åŠ èµ·æ¥ï¼ŒåŠ åˆ°locationä¸­ï¼Œæ­¤æ—¶locationå·²ç»ç§»åŠ¨åˆ°ç¬¬charYè¡Œç¬¬0ä¸ªä½ç½®ä¸Šäº†
+    //æ­¤å¤„æ³¨æ„ï¼Œiæ˜¯ä»1å¼€å§‹è®¡æ•°
     int i;
     for( i = 1;i < charY;i++){
         location+=charCount[i] + 1;
     }
-    //ÔÙ¶Ôlocation½øĞĞcharYĞĞÄÚµÄµ÷Õû
+    //å†å¯¹locationè¿›è¡ŒcharYè¡Œå†…çš„è°ƒæ•´
     location += charX;
     
     printf("location is %d\ncharX is %d\ncharY is %d\n",location,charX,charY);
     
     
-    //´ËÊ±´ÓÎÄ¼şÍ·¿ªÊ¼ÏòºóÒÆ¶¯location¸ö¹â±ê¼´ÎªÊó±êµã»÷µÄ¹â±ê
+    //æ­¤æ—¶ä»æ–‡ä»¶å¤´å¼€å§‹å‘åç§»åŠ¨locationä¸ªå…‰æ ‡å³ä¸ºé¼ æ ‡ç‚¹å‡»çš„å…‰æ ‡
     return location;
 }
