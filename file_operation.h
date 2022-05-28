@@ -18,6 +18,6 @@ void Write(char inputChar);
 void Cut();
 void Paste();
 void Search(char *temp);
-void Change(char *temp);
+void Change( char* temp,char* replaceContain);
 
 #endif
