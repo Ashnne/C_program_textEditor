@@ -1,19 +1,19 @@
 #include"display.h"
 
-//ÎŞÊäÈëÊä³ö£¬»­³öÎå¸ömenu 
+//æ— è¾“å…¥è¾“å‡ºï¼Œç”»å‡ºäº”ä¸ªmenu 
 void DrawMenu()
 {
 	//SetPointSize(10);
-	//menu×Ö·ûÖ¸ÕëÊı×é £¬ÓÃÓÚ»­menu 
+	//menuå­—ç¬¦æŒ‡é’ˆæ•°ç»„ ï¼Œç”¨äºç”»menu 
 	setMenuColors("Dark Grey","Black","Dark Grey","Red",1);
-	char* menuListFile[6]={ "ÎÄ¼ş", "´ò¿ª | Ctrl-O", "±£´æ | Ctrl-S", "Áí´æÎª | Ctrl-N", "¹Ø±Õ | Ctrl-E" };//Áí´æÎªµÄ¿ì½İ¼ü´ı¶¨ 
-	char* menuListEdit[4]={ "±à¼­", "¸´ÖÆ | Ctrl-C", "¼ôÇĞ | Ctrl-X", "Õ³Ìù | Ctrl-V" };
-	char* menuListSearch[3]={ "ËÑË÷", "²éÕÒ | Ctrl-F", "Ìæ»» | Ctrl-R" };
-	char* menuListSize[4]={ "´óĞ¡", "10", "20", "30" };
-	char* menuListFont[4]={ "×ÖÌå", "Times", "Courier", "Default" };
-	char* menuListColor[9]={ "±³¾°ÑÕÉ«", "°×É«", "·ÛÉ«", 
-	"ôä´äÂÌ", "»ÆÉ«", "×ÏÉ«", "À¶É«", "³ÈÉ«" };
-	// intĞÍ±äÁ¿´æ·Å·µ»ØÖµ 
+	char* menuListFile[6]={ "æ–‡ä»¶", "æ‰“å¼€ | Ctrl-O", "ä¿å­˜ | Ctrl-S", "å¦å­˜ä¸º | Ctrl-N", "å…³é—­ | Ctrl-E" };//å¦å­˜ä¸ºçš„å¿«æ·é”®å¾…å®š 
+	char* menuListEdit[4]={ "ç¼–è¾‘", "å¤åˆ¶ | Ctrl-C", "å‰ªåˆ‡ | Ctrl-X", "ç²˜è´´ | Ctrl-V" };
+	char* menuListSearch[3]={ "æœç´¢", "æŸ¥æ‰¾ | Ctrl-F", "æ›¿æ¢ | Ctrl-R" };
+	char* menuListSize[4]={ "å¤§å°", "10", "20", "30" };
+	char* menuListFont[4]={ "å­—ä½“", "Times", "Courier", "Default" };
+	char* menuListColor[9]={ "èƒŒæ™¯é¢œè‰²", "ç™½è‰²", "ç²‰è‰²", 
+	"ç¿¡ç¿ ç»¿", "é»„è‰²", "ç´«è‰²", "è“è‰²", "æ©™è‰²" };
+	// intå‹å˜é‡å­˜æ”¾è¿”å›å€¼ 
 	int selection_1,selection_2,selection_3,selection_4,selection_5,selection_6;
 	selection_1=menuList( GenUIID(0), 0, height-f, width/6, width/6, f, menuListFile, 5 );
 	selection_2=menuList( GenUIID(0), width/6, height-f, width/6, width/6, f, menuListEdit, 4 );
@@ -57,11 +57,11 @@ void DrawMenu()
 }
 
 
-//»­³ö°´Å¥"°ïÖú"
+//ç”»å‡ºæŒ‰é’®"å¸®åŠ©"
 void DrawButton()
 {
 	setButtonColors("Dark Grey","Black","Dark Grey","Red",1);
-	if(button(GenUIID(0),width/5,f,width/5,f,"°ïÖú"))
+	if(button(GenUIID(0),width/5,f,width/5,f,"å¸®åŠ©"))
 	{
 		helpallow *= -1;
 	}
@@ -77,20 +77,20 @@ void Text(){
 	
 	SetPointSize(size);
 	
-    //XµÄ×ø±êÔ­µã
+    //Xçš„åæ ‡åŸç‚¹
 	double X_zero = width / 10;
-    //YµÄ×ø±êÔ­µã
+    //Yçš„åæ ‡åŸç‚¹
     double Y_zero =  height - f * 2;
     
     /*MovePen(X_zero,Y_zero);
     SetPenColor("Red");
     DrawLine(1,0);*/	
     
-    //¹â±êµÄÎ»ÖÃ£¬±ãÓÚÊµÏÖ¹â±ê
+    //å…‰æ ‡çš„ä½ç½®ï¼Œä¾¿äºå®ç°å…‰æ ‡
     int count = 0;
-    //ÅĞ¶Ï£¬Èç¹ûÊÇÑ¡ÖĞµÄ×Ö·û´®µÄ»°£¬ºóÃæ¼Ó¸ö±³¾°
+    //åˆ¤æ–­ï¼Œå¦‚æœæ˜¯é€‰ä¸­çš„å­—ç¬¦ä¸²çš„è¯ï¼Œåé¢åŠ ä¸ªèƒŒæ™¯
     int judgeChosen = 0;
-    //ÁÙÊ±×Ö·ûÖĞ×ª
+    //ä¸´æ—¶å­—ç¬¦ä¸­è½¬
     int tempChar[2] = {'a','\0'};
     
     int i;
@@ -98,29 +98,29 @@ void Text(){
     	int j;
     	//printf("%s","Now is fine");
         for( j = 0; j <= charCount[i] ;j++){
-            //¸ù¾İ¹â±êÔÚÎÄ±¾ÖĞµÄÎ»ÖÃ£¬°Ñ±Ê·Åµ½²»Í¬µÄÎ»ÖÃÉÏ
+            //æ ¹æ®å…‰æ ‡åœ¨æ–‡æœ¬ä¸­çš„ä½ç½®ï¼ŒæŠŠç¬”æ”¾åˆ°ä¸åŒçš„ä½ç½®ä¸Š
             MovePen( X_zero + j * textwidth, Y_zero - i * textheight);
-            //°Ñ±ÊÉè¼ÆºÃ£¬·ÖÁ½Àà£¬countÔÚ²»ÔÚ¹â±êÄÚ
+            //æŠŠç¬”è®¾è®¡å¥½ï¼Œåˆ†ä¸¤ç±»ï¼Œcountåœ¨ä¸åœ¨å…‰æ ‡å†…
             if( count >= cursorBegin && count <= cursorTail - 1 )   judgeChosen = 1;
             else    judgeChosen = 0;
             
-            //¶ÁÒ»ÏÂÎÄ¼şÀïµÄ×Ö·û
+            //è¯»ä¸€ä¸‹æ–‡ä»¶é‡Œçš„å­—ç¬¦
             fseek(buffFile,count,0); 
             tempChar[0] = fgetc(buffFile);
-            //ÕâÊÇ¸öÌî²¹Ìõ¼ş£¬ÒòÎªÎÒ·¢ÏÖÓÃdevµÄ»°£¬»»ĞĞËãÁ½¸ö×Ö·û 
+            //è¿™æ˜¯ä¸ªå¡«è¡¥æ¡ä»¶ï¼Œå› ä¸ºæˆ‘å‘ç°ç”¨devçš„è¯ï¼Œæ¢è¡Œç®—ä¸¤ä¸ªå­—ç¬¦ 
             if(tempChar[0] == '\n')	count++;
 
-            //Èç¹ûÊÇÑ¡ÖĞµÄ£¬¾ÍÔÚºóÃæ»­¸ö¸ñ×Ó£¬Í»³öÂï
+            //å¦‚æœæ˜¯é€‰ä¸­çš„ï¼Œå°±åœ¨åé¢ç”»ä¸ªæ ¼å­ï¼Œçªå‡ºå˜›
             if( judgeChosen)	drawLighting();
             
-            //ÏÈ·Å×Å°É£¬Ğ´¸ö×Ö£¨Ğ´×Ö,ÔİÊ±¾ÍÓÃDrawTextString°Ñ£¬ÎÒÏë»»³É¸ü¼òµ¥µÄ¡£¡£¡£¡£
-            //¿´²»Í¸£¬²»»»ÁË£¬¾ÍÕâ¸ö°É,\nÒ²´ò£¬µ«ÊÇÃ»É¶ÓÃ 
-            //ÑÕÉ«¸Ä»ØÀ´
+            //å…ˆæ”¾ç€å§ï¼Œå†™ä¸ªå­—ï¼ˆå†™å­—,æš‚æ—¶å°±ç”¨DrawTextStringæŠŠï¼Œæˆ‘æƒ³æ¢æˆæ›´ç®€å•çš„ã€‚ã€‚ã€‚ã€‚
+            //çœ‹ä¸é€ï¼Œä¸æ¢äº†ï¼Œå°±è¿™ä¸ªå§,\nä¹Ÿæ‰“ï¼Œä½†æ˜¯æ²¡å•¥ç”¨ 
+            //é¢œè‰²æ”¹å›æ¥
             SetPenColor(color[k-1]);
             DrawTextString( tempChar);   
-	    	//»­¹â±ê
+	    	//ç”»å…‰æ ‡
             if( count == cursorTail - 1)    drawCursor();
-            //ÊıÊı¼ÓÒ»¸ö
+            //æ•°æ•°åŠ ä¸€ä¸ª
             count ++;
         } 
     }
@@ -128,38 +128,38 @@ void Text(){
 
 
 void drawLighting(){
-    //Ñ¡ºÃ±³¾°É«
+    //é€‰å¥½èƒŒæ™¯è‰²
     SetPenColor("Yellow");
-    //´ò¿ªÌî³ä
+    //æ‰“å¼€å¡«å……
     StartFilledRegion(1);
-    //Ìî³ä
+    //å¡«å……
     DrawLine(textwidth,0);
     DrawLine(0,textheight);
     DrawLine(-textwidth,0);
     DrawLine(0,-textheight);
-    //°ÑÌî³äÄ£Ê½¹Ø±Õ
+    //æŠŠå¡«å……æ¨¡å¼å…³é—­
     EndFilledRegion();
     return;
 }
 
 void drawCursor(){
-    //Ñ¡ºÃ±³¾°É«
+    //é€‰å¥½èƒŒæ™¯è‰²
     SetPenColor("Black");
-    //´ò¿ªÌî³ä
+    //æ‰“å¼€å¡«å……
     StartFilledRegion(1);
-    //Ìî³ä
+    //å¡«å……
     DrawLine(0.04,0);
     DrawLine(0,textheight);
     DrawLine(-0.04,0);
     DrawLine(0,-textheight);
-    //°ÑÌî³äÄ£Ê½¹Ø±Õ
+    //æŠŠå¡«å……æ¨¡å¼å…³é—­
     EndFilledRegion();
     return;
 }
 
-/*NewInterface()º¯Êı
-	1.¹¦ÄÜ£º»­³öÒ»ĞĞÌáÊ¾ÓïºÍtextbox(),ÓÃ»§¿ÉÒÔ±à¼­ĞèÒª´ò¿ª/±£´æµÄÎÄ¼şµÄÃû³Æ
-	2.ÎŞÊäÈë±äÁ¿¡¢·µ»ØÖµ
+/*NewInterface()å‡½æ•°
+	1.åŠŸèƒ½ï¼šç”»å‡ºä¸€è¡Œæç¤ºè¯­å’Œtextbox(),ç”¨æˆ·å¯ä»¥ç¼–è¾‘éœ€è¦æ‰“å¼€/ä¿å­˜çš„æ–‡ä»¶çš„åç§°
+	2.æ— è¾“å…¥å˜é‡ã€è¿”å›å€¼
 */
 void NewInterface(){
 //	newAllow*=-1;
@@ -171,7 +171,7 @@ void NewInterface(){
 	DrawTextString("File name (open/save):");
 	setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
 	textbox(GenUIID(0),width/10*4+0.2,height-f*2.8,width/10*5,f,namedefault,100);
-	if(button(GenUIID(0),width/10*4+2.5,height-f*2.8,width/10,f,"È·¶¨")){
+	if(button(GenUIID(0),width/10*4+2.5,height-f*2.8,width/10,f,"ç¡®å®š")){
 		FileSaveAs(namedefault); 
 	}
 }
@@ -180,7 +180,7 @@ void searchFace(){
 	if(searchallow == 1){
 		setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
 		textbox(GenUIID(1),width/10*3.5,height-f*4,width/10*3,f,content,100); 
-		if(button(GenUIID(0),width/10*2,height-f*4,width/10,f,"ËÑË÷")){
+		if(button(GenUIID(0),width/10*2,height-f*4,width/10,f,"æœç´¢")){
 			Search(content);
 		}
 	}
@@ -190,14 +190,23 @@ void searchFace(){
 void changeFace(){
 	if(changeallow == 1){
 		setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
-		textbox(GenUIID(1),width/10*3.5,height-f*4,width/10*3,f,content,100); 
-		if(button(GenUIID(0),width/10*2,height-f*4,width/10,f,"Ìæ»»")){
-			Change(content);
+		textbox(GenUIID(1),width/10*3.5,height-f*4,width/10*3,f,content,100);
+		drawBox( width/10*6.6, height-f*4, width/10*1, f, 1,"è¢«æ›¿æ¢å­—ç¬¦ä¸²" , 'C', "Grey");
+		char* replaceMute[100];
+		textbox(GenUIID(2),width/10*3.5,height-f*5.1,width/10*3,f,replaceMute,100);
+		drawBox( width/10*6.6, height-f*5.1, width/10*1, f, 1,"æ›¿æ¢ç›®æ ‡å­—ç¬¦" , 'C', "Grey");
+		if(button(GenUIID(0),width/10*2,height-f*4.55,width/10,f,"æ›¿æ¢")){
+			Change( content, replaceMute);
 		}
 	}
 	else return;
 }
 
+			
+void drawBox(double x, double y, double w, double h, int fillflag, char *label, char xalignment, char *labelColor);
+			
+			
+			
 /*void openFace(){
 	if(openallow == -1)	return;
 	SetPenColor("Dark Grey");
@@ -207,7 +216,7 @@ void changeFace(){
 	DrawTextString("File name:");
 	setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
 	textbox(GenUIID(0),width/10*4+0.2,height-f*2.8,width/10*5,f,content,100);
-	if(button(GenUIID(0),width/10*4+2.5,height-f*2.8,width/10,f,"´ò¿ª")){
+	if(button(GenUIID(0),width/10*4+2.5,height-f*2.8,width/10,f,"æ‰“å¼€")){
 		openallow *= -1;
 		OpenFile(content); 
 	}
@@ -223,34 +232,34 @@ void helpFace(){
 
 int Count() 
 {
-    //Õâ¸öÊÇÃ¿Ò»ĞĞµÄ¼ÆÊı¸öÊı
+    //è¿™ä¸ªæ˜¯æ¯ä¸€è¡Œçš„è®¡æ•°ä¸ªæ•°
     int i = 0;
-    //Õâ¸öÊÇÔÚÊıĞĞ
+    //è¿™ä¸ªæ˜¯åœ¨æ•°è¡Œ
     int j = 1;
-    //¿ªÊ¼Êı
+    //å¼€å§‹æ•°
     fseek(buffFile,0,0);
-    //¹ı¶È×Ö·û
+    //è¿‡åº¦å­—ç¬¦
     char ch = 1;
     while(!feof(buffFile)){
         ch = fgetc(buffFile);
-        //Èç¹û×Ö·ûÎªEOF£¬¾ÍËµÃ÷½áÊøÁË
+        //å¦‚æœå­—ç¬¦ä¸ºEOFï¼Œå°±è¯´æ˜ç»“æŸäº†
         if( ch == EOF){
             charCount[j] = i;
             return j;
         }
-        //Èç¹û×Ö·ûÎª\n£¬ËµÃ÷¸ÃÌø×ªÏÂÒ»ĞĞÁË
+        //å¦‚æœå­—ç¬¦ä¸º\nï¼Œè¯´æ˜è¯¥è·³è½¬ä¸‹ä¸€è¡Œäº†
         else if( ch == '\n'){
-            //¸³Öµ
+            //èµ‹å€¼
             charCount[j] = i;
-            //¼ÆÊıÇåÁã
+            //è®¡æ•°æ¸…é›¶
             i = 0;
-            //ĞĞÊıÌø×ªÏÂÒ»¸ö
+            //è¡Œæ•°è·³è½¬ä¸‹ä¸€ä¸ª
             j++;
         }
-        //ÆäËûÇé¿ö¼ÆÊı+1
+        //å…¶ä»–æƒ…å†µè®¡æ•°+1
         else    i++;
     }
-    //Èç¹ûÒòÎª¶ÁÈ¡µ½ÎÄ¼şÄ©Î²ÁË£¬Ò²ËµÃ÷½áÊøÁË
+    //å¦‚æœå› ä¸ºè¯»å–åˆ°æ–‡ä»¶æœ«å°¾äº†ï¼Œä¹Ÿè¯´æ˜ç»“æŸäº†
     charCount[j] = i;
     return j;
 }
