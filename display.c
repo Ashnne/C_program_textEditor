@@ -179,7 +179,6 @@ void NewInterface(){
 
 void searchFace(){
 	if(searchallow == 1){
-		char content[100];
 		setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
 		textbox(GenUIID(1),width/10*3.5,height-f*4,width/10*3,f,content,100); 
 		drawBox( width/10*6.6, height-f*4, width/10*1, f, 1,"查找的字符" , 'C', "Grey");
@@ -192,11 +191,9 @@ void searchFace(){
 
 void changeFace(){
 	if(changeallow == 1){
-		char content[100];
 		setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
 		textbox(GenUIID(1),width/10*3.5,height-f*4,width/10*3,f,content,100);
 		drawBox( width/10*6.6, height-f*4, width/10*1, f, 1,"被替换字符串" , 'C', "Grey");
-		char replaceMute[100];
 		textbox(GenUIID(2),width/10*3.5,height-f*5.1,width/10*3,f,replaceMute,100);
 		drawBox( width/10*6.6, height-f*5.1, width/10*1, f, 1,"替换目标字符" , 'C', "Grey");
 		if(button(GenUIID(0),width/10*2,height-f*4.55,width/10,f,"替换")){
@@ -218,7 +215,6 @@ void openFace(){
 	MovePen(width/10,height-f*2.5);
 	SetPenColor("Black");
 	DrawTextString("File name:");
-	char content[100];
 	setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
 	textbox(GenUIID(0),width/10*4+0.2,height-f*2.8,width/10*5,f,content,100);
 	if(button(GenUIID(0),width/10*4+2.5,height-f*2.8,width/10,f,"打开")){
@@ -282,7 +278,6 @@ void format(){
 	if(textheight_allow == 1) textheight_allow == -1;
 	if(textwidth_allow == 1) textwidth_allow == -1;
     //用于接收输入字符串
-    char contain[10];
     setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
 	textbox(GenUIID(1),width/10*3.5,height-f*4,width/10*3,f,contain,9); 
 	SetPenColor("Dark Grey");
