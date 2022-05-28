@@ -180,6 +180,7 @@ void searchFace(){
 	if(searchallow == 1){
 		setTextBoxColors("Dark Grey","Black","Dark Grey","Black",1);
 		textbox(GenUIID(1),width/10*3.5,height-f*4,width/10*3,f,content,100); 
+		drawBox( width/10*6.6, height-f*4, width/10*1, f, 1,"查找的字符" , 'C', "Grey");
 		if(button(GenUIID(0),width/10*2,height-f*4,width/10,f,"搜索")){
 			Search(content);
 		}
