@@ -1,21 +1,21 @@
 #include "file.h"
 
-/*���ļ���Ҫ������������OpenFile(),CloseFile(),FileSave()
-  ���������������ļ����ļ�����ΪNewInterface()�б༭��textbox�е�namedefault�ַ����飨ȫ�֣� 
+/*本文件主要包含三个函数OpenFile(),CloseFile(),FileSave()
+  三个函数操作的文件的文件名均为NewInterface()中编辑的textbox中的namedefault字符数组（全局） 
 1.OpenFile()
- �����롢����ֵ
- ���ܣ���Դ�ļ������������ļ������Text�������ļ���ʾ��ʵ�ֽ�Դ�ļ���ͼ�ν�������ʾ�Ĺ���
+ 无输入、返回值
+ 功能：将源文件拷贝到缓冲文件，结合Text将缓冲文件显示，实现将源文件在图形界面上显示的功能
 2.CloseFile()
- �����롢����ֵ
- ���ܣ��������ļ���գ����Text�������ļ���ʾ��ʵ�ֽ�ͼ�ν�����յĹ���
+ 无输入、返回值
+ 功能：将缓冲文件清空，结合Text将缓冲文件显示，实现将图形界面清空的功能
 3.FileSave()
- �����롢����ֵ
- ���ܣ��������ļ�������Դ�ļ�������ͼ�ν�����������ı�����ʽ�洢���ض��ļ������ļ��� 
+ 无输入、返回值
+ 功能：将缓冲文件拷贝到源文件，即将图形界面的内容以文本的形式存储到特定文件名的文件中 
 */
 
 
-//��ʽ���� 
-//������nת��Ϊ�ַ������ǰmλ 
+//正式函数 
+//将整数n转化为字符数组的前m位 
 char* IntToArray(int m,int n,char* a){
 	a[m]='\0';
 	do{
@@ -26,7 +26,7 @@ char* IntToArray(int m,int n,char* a){
 	return a;
 }
 
-//����������ص�Ĭ���ļ��� 
+//产生日期相关的默认文件名 
 char* FileName(time_t timer,char* b){
 /*	time_t timer;
     struct tm *tblock;
@@ -46,18 +46,18 @@ void FileSave(){
 	char b[13];
 	
 //	if(!ifopen){
-		//д��ʱ��Ĭ��������Դ�ļ� 
+		//写以时间默认命名的源文件 
 		sourceFile=fopen(FileName(time(NULL),b),"w");
 	//}
 	//else{
-		//д���ڱ༭��Դ�ļ� 
+		//写正在编辑的源文件 
 		//sourceFile=fopen(namedefault,"w"); 
 	//}
 	
-	//�������ļ�
+	//读缓冲文件
 	//buffFile=fopen("buffFile.txt","r");
 	
-	//�����ļ�������Դ�ļ� 
+	//缓冲文件拷贝到源文件 
 	rewind(buffFile);
 	while(!feof(buffFile)){
 		c=fgetc(buffFile);
@@ -71,11 +71,11 @@ void FileSave(){
 void FileSaveAs(char* name){
 	char c;
 		
-	//��Դ�ļ� 
+	//打开源文件 
 	sourceFile = fopen(name,"w");
 	//buffFile=fopen("buffFile.txt","w");
 	
-	//�ı�Դ�ļ� 
+	//改变源文件 
 	rewind(buffFile);
 	while(!feof(buffFile)){
 		c=fgetc(buffFile);
@@ -88,14 +88,14 @@ void FileSaveAs(char* name){
 } 
 
 void openFile(){
-    /*char c;
+    char c;
     
-	//�򿪶�Ӧ���ļ�
-	sourceFile=fopen(name,"r");*/
+	//打开对应的文件
+	sourceFile=fopen(name,"r");
 	buffFile=fopen("buffFile.txt","a+");
-	/*rewind(sourceFile);
+	rewind(sourceFile);
 	
-	//�ı仺���ļ� 
+	//改变缓冲文件 
 	while(!feof(sourceFile)){
 		c=fgetc(sourceFile);
 		fputc(c,buffFile);
@@ -104,18 +104,21 @@ void openFile(){
 	fclose(sourceFile);
 	//fclose(buffFile);
 	
-	//���򿪵��ļ�������������ȫ�ֱ�����ʾ��ʱ���ļ����� 	
-	strcpy(namedefault,name);*/
+	//将打开的文件名存起来，用全局变量表示此时有文件被打开 	
+	strcpy(namedefault,name);
 	ifopen=1;
 } 
 
 void CloseFile(){
-	//��ջ����ļ�  
+	//清空缓冲文件  
 	//buffFile=fopen("buffFile.txt","w");
 	fclose(buffFile);
 	
-	//��ʾ�ļ����򿪵�ȫ�ֱ�����Ϊ0 
+	//表示文件被打开的全局变量赋为0 
 	ifopen=0;
 }
 
+void newFile(){
+	buffFile=fopen("buffFile.txt","a+");
+}
  
