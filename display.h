@@ -33,6 +33,9 @@ extern int offput;
 extern int fontSize_allow;
 extern int textheight_allow;
 extern int textwidth_allow;
+extern char content[100];
+extern char replaceMute[100];
+extern char contain[10];
 
 extern void Copy();
 extern void Delete();
