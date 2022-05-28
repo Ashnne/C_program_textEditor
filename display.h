@@ -7,15 +7,15 @@
 #include"graphics.h"
 #include"imgui.h"
 
-//¶¨ÒåÎ»ÖÃ£º   ÒâÒå£º»º³åÎÄ¼şµÄÎÄ¼şÖ¸ÕëÍ·
+//å®šä¹‰ä½ç½®ï¼š   æ„ä¹‰ï¼šç¼“å†²æ–‡ä»¶çš„æ–‡ä»¶æŒ‡é’ˆå¤´
 extern FILE *buffFile;
 extern char namedefault[101];
-//±³¾°ÑÕÉ«µÄĞòºÅ£¬ÓÃÀ´¸Ä±³¾°ÑÕÉ« 
+//èƒŒæ™¯é¢œè‰²çš„åºå·ï¼Œç”¨æ¥æ”¹èƒŒæ™¯é¢œè‰² 
 extern int k;
-//¶¨ÒåÑÕÉ«Ö¸ÕëÊı×é °×É«¡¢·ÛÉ«¡¢ôä´äÂÌ¡¢»ÆÉ«¡¢×ÏÉ«¡¢À¶É«¡¢³ÈÉ« 
+//å®šä¹‰é¢œè‰²æŒ‡é’ˆæ•°ç»„ ç™½è‰²ã€ç²‰è‰²ã€ç¿¡ç¿ ç»¿ã€é»„è‰²ã€ç´«è‰²ã€è“è‰²ã€æ©™è‰² 
 extern char* color[];
 extern double height,width;
-//GetFontHeight()µÄÁ½±¶ 
+//GetFontHeight()çš„ä¸¤å€ 
 extern double f;
 extern int newAllow;
 extern int searchallow;
@@ -28,9 +28,11 @@ extern double textwidth;
 extern double textheight;
 extern int cursorBegin;
 extern int cursorTail;
-extern char content[100];
-extern int size;
+extern int fontSize;
 extern int offput;
+extern int fontSize_allow;
+extern int textheight_allow;
+extern int textwidth_allow;
 
 extern void Copy();
 extern void Delete();
@@ -38,7 +40,7 @@ extern void Write(char inputChar);
 extern void Cut();
 extern void Paste();
 extern void Search(char *temp);
-extern void Change(char *temp);
+extern void Change(char *temp,char* replaceContain);
 
 void DrawMenu();
 void DrawButton();
@@ -51,6 +53,8 @@ void searchFace();
 void helpFace();
 void changeFace();
 int Count();
+void format();
+int charToNumber( char *temp );
 void display();
 
 #endif
